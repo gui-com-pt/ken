@@ -1,0 +1,4 @@
+#!/usr/bin/env hhvm
+<?hh
+
+require __DIR__ . '/bootstrap.php';

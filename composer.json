@@ -1,0 +1,29 @@
+{
+	"name": "guilhermegeek/ken",
+	"description": "Build automation tool for Hacklang projects",
+	"keywords": [
+		"build",
+		"automation"
+	],
+	"license": "MIT",
+	"homepage": "https://github.com/guilhermegeek/ken",
+	"authors": [
+		{
+			"name": "Guilherme Cardoso",
+			"email": "email@guilhermecardoso.pt"
+		}
+	],
+    "require": {
+    	"guilhermegeek/communia": "dev-dev",
+        "chh/optparse": "^0.1.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~4.5"
+    },
+    "autoload": {
+		"psr-4": {		
+        	"Ken\\": "src/Ken",
+        	"Test\\": "tests/Ken"
+    	}
+    }
+}
