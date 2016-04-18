@@ -40,13 +40,13 @@ desc('Minify clientside code');
 task('minify', function(Application $app) {
 	// minify files
 });
-
+```
 
 To provider a better OOO approach, you can define tasks instead with **TaskLibraryInterface**.
 
 Libraries are registered in **Application** with:
 
-```
+```php
 register(TaskLibraryInterface $taskLib, array $parameters = array())
 ```
 
