@@ -34,7 +34,7 @@ class Cli extends AbstractClient implements ClientInterface {
     return $parser;
   }
 
-  public function runBeforeInit() : bool
+  public function runBeforeInit() : mixed
   {
     if ($this->opts["init"]) {
         return $this->initProject() ? 0 : 1;
@@ -44,6 +44,7 @@ class Cli extends AbstractClient implements ClientInterface {
         fwrite(STDERR, $this->formatUsage());
         return 0;
     }
+    return null;
   }
 	
   /**
