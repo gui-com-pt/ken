@@ -1,0 +1,21 @@
+{
+  "name": "ken",
+  "version": "0.0.1",
+  "description": "Common libraries",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/guilhermegeek/ken"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/guilhermegeek/ken/issues"
+  },
+  "homepage": "https://github.com/guilhermegeek/ken"
+}
