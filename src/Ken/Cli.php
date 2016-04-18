@@ -11,7 +11,7 @@ use Ken\Interfaces\ClientInterface,
 
 class Cli extends AbstractClient implements ClientInterface {
 
-	public function __construct(?Parser $parser)
+	public function __construct(?Parser $parser = null)
 	{
     parent::__construct();
     $this->opts = $parser ?: $this->getDefaultParser();
