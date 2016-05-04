@@ -11,8 +11,10 @@ use Ken\Interfaces\ClientInterface,
 
 class Cli extends AbstractClient implements ClientInterface {
 
+  protected array $binPaths;
 	public function __construct(?Parser $parser = null)
 	{
+    $this->binPaths = array('bin/ken', 'bin/./ken');
     parent::__construct();
     $this->opts = $parser ?: $this->getDefaultParser();
 		
@@ -97,7 +99,7 @@ class Cli extends AbstractClient implements ClientInterface {
     $args = $this->opts->args();
 
     foreach ($args as $arg) {
-      if(in_array($arg, array('bin/ken', 'bin/./ken'))) { 
+      if(in_array($arg, $this->binPaths)) { 
         continue;
       }
 

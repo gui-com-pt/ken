@@ -194,6 +194,7 @@ class Application {
                     $prerequisites = $arg;
                     break;
                 case is_string($arg) && isset($this->taskController[$arg]):
+                	
 	                if(is_null($prerequisites)) {
 	                	$prerequisites = array();
 	                }

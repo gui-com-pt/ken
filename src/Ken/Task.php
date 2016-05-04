@@ -48,11 +48,13 @@ class Task implements TaskInterface {
 	 */
 	public function register(?mixed $dependencies = null, $action = null) : void
 	{
-		if($dependencies !== null) {
-			if($this->dependencies instanceof \Set) {
-				$this->dependencies->addAll($dependencies);
+		if($dependencies !== null && $this->dependencies instanceof \Set) {
+			$this->dependencies->addAll($dependency);
+			//foreach ($dependencies as $dependency) {
+		//		$this->dependencies->add($dependency);
+	//		}
 
-			}
+			
 		} else {
 			$this->dependencies = new Set($dependencies);
 		}
@@ -76,17 +78,14 @@ class Task implements TaskInterface {
 	{
 		$app = $this->app;
 		
-		if($this->dependencies !== null) {
+		if($this->dependencies !== null && $this->dependencies->count() > 0) {
 			$deps = $this->dependencies->filter($dep ==> {
-				if($app->taskDefined((string) $dep)) {
+				if($app->taskIsDefined((string) $dep)) {
 					$app->taskController[(string) $dep]->invoke();	
 				}
 			});
+			
 		}
-
-        if ($this->dependencies !== null) {
-            //$this->dependencies->rewind();
-        }
 
         $this->execute();
 	}

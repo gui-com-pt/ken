@@ -46,8 +46,8 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase {
 		$app->task('some-name', function($app) use(&$executed) {
 			$executed = true;
 		});
-		$app->task('some-name-after', 'some-name');
-		$app->task('some-name-before', 'some-name');
+		$app->task('some-name-after', array('some-name'));
+		$app->task('some-name-before', array('some-name'));
 		$app->task('dont-execute', function($app) {
 			throw new \Exception("Shouldn't execute this task");
 		});
