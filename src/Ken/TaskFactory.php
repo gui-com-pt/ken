@@ -18,7 +18,7 @@ class TaskFactory implements TaskFactoryInterface {
 	 * The user only adds an action
 	 */
 	public array $tasks;
-
+	
 	protected EventManager $em;
 
 	public function __construct(

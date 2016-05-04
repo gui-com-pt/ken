@@ -6,7 +6,7 @@ abstract class AbstractClient {
 
 	protected string $defaultConfigPath;
 
-	protected Application $app;
+	public Application $app;
 
 	public function __construct()
 	{
@@ -50,7 +50,7 @@ abstract class AbstractClient {
 		}
 	}
 
-	public function invokeTask(TaskInterface $task) : void
+	public function invokeTask(string $task) : void
 	{
 		return $this->app->execute(array($task));
 	}
@@ -100,7 +100,9 @@ task('default', array('example'));
 
 desc('Write Hello World to STDOUT');
 task('example', function() {
-	println("Example task executed");
+	\hhvm(array('--version'));
+	println("Example task executed  right now");
+	\shell(array('uname', '-a'));
 });
 EOF;
 
@@ -109,5 +111,10 @@ EOF;
 	    printf("Initialized project at \"%s\"\n", getcwd());
 	    return true;
 
+	}
+
+	public function dispose() : void
+	{
+		$this->app = null;		
 	}
 }

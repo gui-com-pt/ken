@@ -11,21 +11,43 @@ use Ken\Interfaces\ClientInterface,
 
 class Cli extends AbstractClient implements ClientInterface {
 
-	public function __construct()
+  protected array $binPaths;
+	public function __construct(?Parser $parser = null)
 	{
+    $this->binPaths = array('bin/ken', 'bin/./ken');
     parent::__construct();
-		$this->opts = new Parser();
-		$this->opts
-            ->addFlag('init', array("alias" => '-i'))
-            ->addFlag('version')
-            ->addFlag('help', array("alias" => '-h'))
-            ->addFlag('tasks', array("alias" => '-t'))
-            ->addFlag('chdir', array("alias" => '-C', "has_value" => true))
-            ->addFlag('verbose', array("alias" => '-v'))
-            ->addFlagVar('all', $this->showAllTasks, array("alias" => '-A'))
-            ->addFlagVar('trace', $this->trace, array("alias" => '-T'))
-            ->addFlagVar('force', $this->forceRun, array("alias" => '-f'));
+    $this->opts = $parser ?: $this->getDefaultParser();
+		
 	}
+
+  protected function getDefaultParser() : Parser
+  {
+    $parser = new Parser();
+    $parser
+      ->addFlag('init', array("alias" => '-i'))
+      ->addFlag('version')
+      ->addFlag('help', array("alias" => '-h'))
+      ->addFlag('tasks', array("alias" => '-t'))
+      ->addFlag('chdir', array("alias" => '-C', "has_value" => true))
+      ->addFlag('verbose', array("alias" => '-v'))
+      ->addFlagVar('all', $this->showAllTasks, array("alias" => '-A'))
+      ->addFlagVar('trace', $this->trace, array("alias" => '-T'))
+      ->addFlagVar('force', $this->forceRun, array("alias" => '-f'));
+    return $parser;
+  }
+
+  public function runBeforeInit() : mixed
+  {
+    if ($this->opts["init"]) {
+        return $this->initProject() ? 0 : 1;
+    }
+
+    if ($this->opts["help"]) {
+        fwrite(STDERR, $this->formatUsage());
+        return 0;
+    }
+    return null;
+  }
 	
   /**
    * Run the client
@@ -48,13 +70,8 @@ class Cli extends AbstractClient implements ClientInterface {
       chdir($dir);
     }
 
-    if ($this->opts["init"]) {
-        return $this->initProject() ? 0 : 1;
-    }
-
-    if ($this->opts["help"]) {
-        fwrite(STDERR, $this->formatUsage());
-        return 0;
+    if($r = $this->runBeforeInit()) {
+      return $r;
     }
 
     try {
@@ -82,7 +99,7 @@ class Cli extends AbstractClient implements ClientInterface {
     $args = $this->opts->args();
 
     foreach ($args as $arg) {
-      if(in_array($arg, array('bin/ken', 'bin/./ken'))) { 
+      if(in_array($arg, $this->binPaths)) { 
         continue;
       }
 

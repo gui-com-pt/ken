@@ -3,7 +3,7 @@ Ken
 
 Ken is a project automation tool in Hacklang and can be used as a general build tool as well.
 
-Ken exists because of [Bob](https://github.com/CHH/optparse), a great PHP framework it's based on. I haven't forked because the project changed too much.
+Ken exists because of [Bob](https://github.com/CHH/bob), a great PHP tool it's based on. I haven't forked because the project changed too much.
 
 ## How it works
 
@@ -11,8 +11,7 @@ Ken doesn't use XML/JSON for task files. Instead, tasks are registered with the 
 
 [Application](src/Ken/Application.php) is the core object used by developers to register task files or libraries.
 
-The
-The tasks are created by [TaskFactory](src/Ken/TaskFactory).
+The tasks are created by [TaskFactory](src/Ken/TaskFactory.php).
 
 ## Getting Started
 
@@ -41,12 +40,14 @@ task('minify', function(Application $app) {
 	// minify files
 });
 
+task('default', ['concat', 'minify'])
+```
 
-To provider a better OOO approach, you can define tasks instead with **TaskLibraryInterface**.
+To provide a better OOO approach, you can define tasks instead with **TaskLibraryInterface**.
 
 Libraries are registered in **Application** with:
 
-```
+```php
 register(TaskLibraryInterface $taskLib, array $parameters = array())
 ```
 
