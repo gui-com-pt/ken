@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "3fc7cbb1ab169512c73e6c6d0ef101f5",
-    "content-hash": "fbe631cf882fa60bc22f585ee863766e",
+    "hash": "a13cc9d469ce1d0f5829f529ec8458ea",
+    "content-hash": "dabdb73b46d526b0c55542f3b69481b4",
     "packages": [
         {
             "name": "chh/optparse",
@@ -57,7 +57,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guilhermegeek/communia/zipball/b5e4f400375913341cc150148310b839fe8053e8",
+                "url": "https://api.github.com/repos/guilhermegeek/communia/zipball/af38a0cef4ee46c7e347a43401740eac8d4320f2",
                 "reference": "b5e4f400375913341cc150148310b839fe8053e8",
                 "shasum": ""
             },
@@ -76,6 +76,55 @@
             },
             "notification-url": "https://packagist.org/downloads/",
             "time": "2016-04-17 20:02:00"
+        },
+        {
+            "name": "symfony/process",
+            "version": "v3.0.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/process.git",
+                "reference": "53f9407c0bb1c5a79127db8f7bfe12f0f6f3dcdb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/process/zipball/53f9407c0bb1c5a79127db8f7bfe12f0f6f3dcdb",
+                "reference": "53f9407c0bb1c5a79127db8f7bfe12f0f6f3dcdb",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5.9"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\Process\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony Process Component",
+            "homepage": "https://symfony.com",
+            "time": "2016-04-14 15:30:28"
         }
     ],
     "packages-dev": [

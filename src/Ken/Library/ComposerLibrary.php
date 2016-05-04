@@ -2,7 +2,8 @@
 
 namespace Ken\Library;
 
-use Ken\Interfaces\TaskLibraryInterface;
+use Ken\Application,
+    Ken\Interfaces\TaskLibraryInterface;
 
 
 
@@ -34,9 +35,11 @@ class ComposerLibrary implements TaskLibraryInterface {
 
         });
 
-        $app->task(self::COMPOSER_INSTALL, function($task) {
-
+        $app->task(self::COMPOSER_INSTALL, array('composer.phar'⁾, function($task) {
+       
         });
+
+       
 
     }
 }

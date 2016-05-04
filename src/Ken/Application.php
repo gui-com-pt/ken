@@ -65,7 +65,7 @@ class Application {
 	 */
 	protected bool $forceRun = false;
 
-	protected Set<TaskLibraryInterface> $taskLibraries;
+	protected Vector<TaskLibraryInterface> $taskLibraries;
 
 	protected Set<string> $configFiles;
 
@@ -84,13 +84,18 @@ class Application {
 		$this->loadedConfigs = new Set<string>();
 		$this->configFiles = new Set<string>(array('ken_config.php'));
 		$this->configLoadPath = 'ken_tasts';
-		$this->taskLibraries = new Set<TaskLibraryInterface>();
+		$this->taskLibraries = new Vector<TaskLibraryInterface>();
 		$factory = new ContainerFactory(new \Pi\Cache\InMemoryCacheProvider());
 		$this->container = $container = $factory->createContainer();
 		$this->em = new EventManager();
 		$this->taskController = new TaskController();
 		$this->taskFactory = new TaskFactory($this);
 		$this->log->debug('Application constructed.');
+	}
+
+	public function log() : ILog
+	{
+		return $this->log;
 	}
 
 	static function findConfigFile($filename, $cwd)
@@ -121,6 +126,9 @@ class Application {
 	{
 		$this->loadConfiguration();
 		// call boot on taskLibraries
+		foreach ($this->taskLibraries as $library) {
+			$library->boot($this);
+		}
 		$this->log->debug('Application initialized.');
 	}
 

@@ -2,16 +2,46 @@
 
 namespace Test;
 
-use Ken\Application;
+use Ken\Application,
+	Ken\Library\ComposerLibrary,
+	Ken\Interfaces\TaskLibraryInterface;
 
 
 
+
+class MockLibrary implements TaskLibraryInterface {
+
+	static $initialized = 0;
+
+	public function register(Application $app)
+    {
+    	self::$initialized = 1;
+    }
+    
+    public function boot(Application $app)
+    {
+    	$app->task('key', function($task) {
+    		MockLibrary::$initialized = 2;
+    	});
+    }
+}
 
 class ApplicationTest extends \PHPUnit_Framework_TestCase {
 	
 	public function setUp()
 	{
 		TestExtensions::init();
+	}
+
+	public function testCanRegisterComposerLibrary()
+	{
+		$app = new Application();
+		$app->register(new MockLibrary());
+		$app->init();
+		$this->assertEquals(MockLibrary::$initialized, 1);
+		$app->execute(array('key'));
+		$this->assertEquals(MockLibrary::$initialized, 2);
+
 	}
 
 	public function testCanCreateDependencies()
@@ -52,6 +82,7 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase {
 			throw new \Exception("Shouldn't execute this task");
 		});
 		$this->assertFalse($executed);
+		$app->init();
 		$app->execute(array('some-name'));
 		$this->assertTrue($executed);
 		$executed = false;
