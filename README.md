@@ -3,7 +3,7 @@ Ken
 
 Ken is a project automation tool in Hacklang and can be used as a general build tool as well.
 
-Ken exists because of [Bob](https://github.com/CHH/optparse), a great PHP tool it's based on. I haven't forked because the project changed too much.
+Ken exists because of [Bob](https://github.com/CHH/bob), a great PHP tool it's based on. I haven't forked because the project changed too much.
 
 ## How it works
 
@@ -39,9 +39,11 @@ desc('Minify clientside code');
 task('minify', function(Application $app) {
 	// minify files
 });
+
+task('default', ['concat', 'minify'])
 ```
 
-To provider a better OOO approach, you can define tasks instead with **TaskLibraryInterface**.
+To provide a better OOO approach, you can define tasks instead with **TaskLibraryInterface**.
 
 Libraries are registered in **Application** with:
 
